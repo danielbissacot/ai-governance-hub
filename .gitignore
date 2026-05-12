@@ -1,2 +1,6 @@
-
-.env.hub
+node_modules/
+.env*
+*.vsix
+out/
+.vscode/
+.gemini/
