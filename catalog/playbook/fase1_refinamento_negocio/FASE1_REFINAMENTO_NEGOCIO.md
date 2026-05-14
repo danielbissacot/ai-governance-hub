@@ -41,6 +41,7 @@ Gere o seu relatório final estruturado exatamente com o seguinte formato:
 
 1. 📊 **Diagnóstico Original:** Apresente a Nota de Conformidade (%), o Status, os defeitos encontrados e os riscos de escopo.
 2. 📝 **História Refinada (Negócio):** A nova narrativa corrigida para o padrão de Excelência Ágil.
-3. 🎯 **Regras e Critérios de Aceite de Negócio:** Sub-blocos demarcados com as regras `[Condição] → [Ação]` e os critérios pontuais e testáveis de entrega.
-4. ⚙️ **Especificação Técnica Derivada:** Componentes do sistema afetados, sugestão de abordagens de arquitetura e a checklist técnica que o desenvolvedor deverá cumprir inspirada nesta história.
+3. 🎯 **Regras e Critérios de Aceite (BDD):** Sub-blocos demarcados com as regras `[Condição] → [Ação]`. Os critérios de aceite devem OBRIGATORIAMENTE seguir o formato BDD (`Dado que`, `Quando`, `Então`).
+4. 📈 **Critérios de Sucesso Mensuráveis:** Defina pelo menos 2 métricas de sucesso independentes da tecnologia (Ex: SC-001: Tempo de resposta < 200ms).
+5. ⚙️ **Especificação Técnica Derivada:** Componentes do sistema afetados, sugestão de abordagens de arquitetura e a checklist técnica que o desenvolvedor deverá cumprir inspirada nesta história.
 ```

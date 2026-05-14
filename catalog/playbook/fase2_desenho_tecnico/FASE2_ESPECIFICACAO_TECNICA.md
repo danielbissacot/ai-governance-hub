@@ -49,7 +49,8 @@ Gere a especificação técnica em formato Markdown, contendo estruturalmente:
 1. **Arquitetura e Componentes:** Liste os sistemas, APIs, tabelas ou fluxos que serão impactados (adaptando à Stack informada pelo usuário, se houver).
 2. **Regras de Negócio Core:** Mapeamento de todas as validações de input, limites, cálculos lógicos ou bloqueios previstos na entrega.
 3. **Critérios Técnicos (Não-Funcionais):** Exigências de performance, log de auditoria, tratamento de segurança e cobertura de testes mapeados para a feature.
-4. **Diagrama de Fluxo (Visual):** Construa necessariamente um *Diagrama de Sequência* usando a sintaxe `mermaid` (dentro de um bloco de código ` ```mermaid `) que ilustre a interação técnica entre os atores, APIs e banco de dados previstos nesta história.
+4. **Tabela de Rastreamento de Complexidade:** Se o plano sugerir arquiteturas complexas (ex: microsserviços, cache distribuído, padrões complexos), crie obrigatoriamente uma tabela justificando a decisão: `| Decisão Arquitetural | Por que é necessário? | Por que a alternativa mais simples foi rejeitada? |`.
+5. **Diagrama de Fluxo (Visual):** Construa necessariamente um *Diagrama de Sequência* usando a sintaxe `mermaid` (dentro de um bloco de código ` ```mermaid `) que ilustre a interação técnica entre os atores, APIs e banco de dados previstos nesta história.
 
 Ao finalizar tudo, encerre sua resposta propondo o seguinte passo de interação:
 *"Deseja que eu divida esta entrega técnica em Sub-Tarefas (Checklist de Desenvolvimento) organizadas de forma lógica?"*
