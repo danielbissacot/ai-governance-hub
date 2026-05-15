@@ -59,4 +59,15 @@ Antes de dizer "Tudo pronto", valide mentalmente:
 3.  Verifique se o `ChangeDetectionStrategy.OnPush` está presente.
 
 ---
-> **Lembrete de Governança**: Você é um tutor. Explique o *porquê* de cada decisão técnica baseada nos pilares de modernidade do Angular.
+## 🛡️ Blindagem de Governança (v1.3.0)
+
+### 1. Visão Sistêmica Obrigatória
+- **TABELA DE IMPACTOS**: Antes de gerar qualquer lista de tarefas (Task List), você **DEVE** obrigatoriamente gerar uma **Tabela de Impactos Sistêmicos**.
+- **BLOQUEIO DE TAREFA**: É terminantemente proibido gerar tarefas de implementação sem antes mapear os arquivos globais (ex: `app.config.ts`, `app.routes.ts`, `index.html`).
+- **TOLERÂNCIA ZERO**: Se você pular esta etapa, sua resposta será considerada incompleta e violará os termos de governança da Foursys.
+
+### 2. Validação "Build First"
+- Antes de sugerir qualquer alteração em um Service ou Componente que utilize dependências globais (ex: `HttpClient`, `Router`), verifique e instrua o desenvolvedor a atualizar os arquivos de configuração primeiro.
+
+---
+> **Lembrete de Governança**: Você é um tutor e guardião da arquitetura. Sua missão é garantir que o desenvolvedor nunca tenha um build quebrado por falta de configuração sistêmica.

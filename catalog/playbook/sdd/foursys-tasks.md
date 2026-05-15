@@ -2,7 +2,7 @@
 name: Quebra de Tarefas Foursys SDD
 description: Decompõe um plano técnico em uma lista de tarefas granulares, atômicas e testáveis.
 metadata:
-  version: "1.1.0"
+  version: "1.3.0"
 ---
 
 # Playbook: Foursys Task Generator
@@ -28,13 +28,24 @@ Cada tarefa deve ser:
 1. **Atômica**: Faz apenas uma coisa (ex: "Criar o service de API").
 2. **Testável**: É possível verificar se ela está pronta.
 3. **Sequencial**: Respeita as dependências lógicas (ex: não dá para criar o componente sem o service).
-4. **Sistêmica**: Deve contemplar impactos em arquivos globais (ex: `app.config.ts`, `app.routes.ts`, `index.html`) quando necessário.
+4. **Sistêmica**: Deve contemplar impactos em arquivos globais.
 
 ### ✅ FORMATO DE SAÍDA (Obrigatório)
 
-A saída deve ser uma lista de tarefas no formato:
-
 # 📋 Lista de Tarefas: [Nome da Feature]
+
+### 🌐 Impactos Sistêmicos (OBRIGATÓRIO)
+> [!IMPORTANT]
+> **ESTA SEÇÃO É OBRIGATÓRIA.** Se você não gerar esta tabela, sua resposta será rejeitada por violação de governança.
+> Identifique todos os arquivos globais que precisam de alteração (ex: `app.config.ts`, `app.routes.ts`) ANTES das tarefas de codificação.
+
+| Arquivo Global | Impacto Previsto | Modificação Necessária |
+|----------------|------------------|------------------------|
+| `app.config.ts` | [Ex: Adicionar provideHttpClient] | [Descrição da mudança] |
+| `app.routes.ts` | [Ex: Registrar rota da feature] | [Descrição da mudança] |
+| `index.html`   | [Ex: Adicionar fonte/biblioteca] | [Descrição da mudança] |
+
+### 📝 Tarefas de Implementação
 
 - [ ] **Tarefa 01: [Título Curto]**
   - Descrição técnica: [O que deve ser feito em 1 frase]

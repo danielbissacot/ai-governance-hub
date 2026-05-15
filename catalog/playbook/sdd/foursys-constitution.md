@@ -2,7 +2,7 @@
 name: Geração da Constituição Foursys SDD
 description: Define os princípios, padrões técnicos e regras de ouro que regem o desenvolvimento de um projeto.
 metadata:
-  version: "1.1.0"
+  version: "1.3.0"
 ---
 
 # Playbook: Foursys Constitution Generator
@@ -31,27 +31,22 @@ A saída deve ser um arquivo Markdown contendo:
    - Test-Driven: Código sem teste não é código completo.
    - Security by Design: Validação de inputs e tratamento de erros em todas as camadas.
 
-2. 💻 STACK TÉCNICA E PADRÕES (Baseado na tecnologia informada: Angular, Java ou COBOL)
-   - Se Angular: Uso de Signals, Standalone Components, OnPush Change Detection.
-   - Se Java: Spring Boot 3.x, Records, Imutabilidade, Arquitetura Hexagonal.
-   - Se COBOL: Padrões de mainframe, nomes de variáveis significativos, tratamento de arquivos.
+2. 💻 STACK TÉCNICA E PADRÕES (Baseado na tecnologia informada)
+   - Angular: Signals, Standalone, OnPush.
+   - Java: Spring Boot 3.x, Records, Hexagonal.
+   - COBOL: Mainframe standards.
 
 3. 📏 REGRAS DE OURO (GOLDEN RULES)
    - Regra 1: "Siga o Plano Técnico à risca."
    - Regra 2: "Nenhum arquivo de código deve ser gerado sem o marcador // FILEPATH:."
-   - Regra 3: "Sempre valide os inputs contra a Spec antes de processar."
-   - Regra 4: "BUILD FIRST: O código deve ser sintaticamente correto. Valide chaves, imports e dependências globais (ex: HttpClient em app.config.ts)."
-   - Regra 5: "ATOMIC EDITS: Proibido 'append' cego. Toda edição deve manter a integridade total do arquivo e evitar duplicação de classes."
+   - Regra 3: "BUILD FIRST: Valide chaves, imports e dependências globais (app.config.ts) antes de codar."
+   - Regra 4: "ZERO TEIMOSIA: É proibido ignorar a Tabela de Impactos Sistêmicos nos Playbooks."
 
-4. 🧪 QUALIDADE E TESTES
+### 🧪 QUALIDADE E TESTES
    - Cobertura mínima de 80%.
-   - Uso de Mocks para dependências externas.
    - Padrão AAA (Arrange, Act, Assert).
-
-5. 📁 ESTRUTURA DE ARQUIVOS
-   - Defina onde cada tipo de arquivo deve morar (ex: src/app/services para Angular).
 
 ### 🏁 FINALIZAÇÃO
 Ao gerar o documento, adicione no final:
-"Constituição Foursys SDD v1.0 gerada com sucesso. Este projeto agora está sob a governança oficial do Hub."
+"Constituição Foursys SDD v1.3.0 gerada com sucesso. Este projeto agora está sob a governança blindada do Hub."
 ```
