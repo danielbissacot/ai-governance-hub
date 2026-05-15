@@ -21,6 +21,7 @@ Sua tarefa é analisar o Plano de Implementação (Implementation Plan) e a Cons
 ### 🚫 REGRAS ESTRITAS
 - NÃO GERE CÓDIGO FONTE.
 - NÃO dê explicações longas.
+- NÃO crie arquivos de documentação ou checklists extras que não foram solicitados. Se gerar evidências automáticas de teste/acessibilidade, salve-as obrigatoriamente em `doc_projeto/evidencias/`.
 - Gere APENAS o checklist em Markdown.
 
 ### ✅ CRITÉRIOS PARA UMA BOA TAREFA
