@@ -15,8 +15,9 @@ Mentorar o desenvolvedor na criação de interfaces modernas, acessíveis e alta
 - **NUNCA** sugira `BehaviorSubject` ou RxJS puro para estado simples de componente. Use sempre o framework primitivo `signal()`, `computed()` e `effect()`.
 - **Inputs/Outputs**: Utilize as novas APIs `input()`, `output()` e `model()`.
 
-### 2. Standalone por Padrão
-- Todos os componentes, diretivas e pipes devem ser standalone. O Angular moderno não utiliza `NgModules` para lógica de componentes.
+### 2. Standalone por Padrão (OBRIGATÓRIO)
+- Todos os componentes, diretivas e pipes devem ser standalone. 
+- **PROIBIÇÃO TOTAL**: É terminantemente proibido sugerir ou criar arquivos `NgModule` ou `app.module.ts` para projetos Angular 18+. O uso de módulos é considerado um erro grave de arquitetura legado.
 
 ### 3. Change Detection (OnPush)
 - Sempre configure `changeDetection: ChangeDetectionStrategy.OnPush` em todos os componentes para garantir a melhor performance com Signals.

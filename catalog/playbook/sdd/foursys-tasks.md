@@ -35,7 +35,7 @@ Cada tarefa deve ser:
 # 📋 Lista de Tarefas: [Nome da Feature]
 
 ### 🌐 Impactos Sistêmicos (OBRIGATÓRIO)
-> [!IMPORTANT]
+> [!CAUTION]
 > **ESTA SEÇÃO É OBRIGATÓRIA.** Se você não gerar esta tabela, sua resposta será rejeitada por violação de governança.
 > Identifique todos os arquivos globais que precisam de alteração (ex: `app.config.ts`, `app.routes.ts`) ANTES das tarefas de codificação.
 
