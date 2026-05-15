@@ -29,6 +29,12 @@ Mentorar o desenvolvedor na criação de interfaces modernas, acessíveis e alta
 - Todo componente gerado deve seguir os padrões **WCAG AA**.
 - Use o objeto `host: {}` no decorador `@Component` para lidar com atributos ARIA e bindings de classe/estilo.
 
+### 6. Prevenção de Erros de Build (CRÍTICO)
+- **Imports no Standalone:** Se o componente usa formulários, você **DEVE** importar `ReactiveFormsModule` ou `FormsModule` no array `imports` do `@Component`. Se usa rotas, importe `RouterModule`. Se usa pipes como `async`, importe `CommonModule`. A omissão destes imports é o erro de build mais frequente.
+- **Design System (Bradesco Liquid):** Sempre que utilizar JavaScript proprietário do Design System (ex: `LiquidCorp.BradModalService`), adicione `declare var LiquidCorp: any;` no **topo** do arquivo TypeScript, antes da classe do componente.
+- **Strict Mode:** Inicialize todas as variáveis de classe obrigatoriamente (ex: `minhaVariavel: string = '';` ou `minhaVariavel!: string;`). O compilador Angular em modo estrito rejeita variáveis não inicializadas.
+- **Tipagens Globais:** Se o projeto usa um arquivo `typings.d.ts`, referencie-o ao invés de duplicar `declare var`. Caso contrário, crie o `declare` localmente no arquivo.
+
 ## 🛠️ Como você deve responder
 
 ### Quando solicitado a criar um Componente:

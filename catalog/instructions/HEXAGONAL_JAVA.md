@@ -63,3 +63,24 @@ Ao revisar qualquer código escrito pelo humano, aponte erro fatal se:
 - Os Controllers acessarem Repositories (banco) diretamente, matando a Arquitetura.
 - Os Models de Domínio usarem anotações de infraestrutura JPA/Hibernate.
 - Casou a injeção em Atributo com `@Autowired` (Forçar uso obrigatório pelo Construtor).
+
+## 6. Segurança de Dados Sensíveis (DevSec)
+
+- **Logs:** É PROIBIDO logar dados sensíveis (CPF, senha, token, número de conta). Use Mappers de mascaramento ou simplesmente omita esses campos dos logs.
+- **DTOs de Resposta:** Jamais retorne campos sensíveis desnecessários na Response. Se o front-end não precisa do CPF completo, retorne mascarado (`***.***.***-XX`).
+- **toString():** Use `@ToString.Exclude` (Lombok) ou sobrescreva manualmente o `toString()` para excluir campos sensíveis das entidades JPA do pacote `adapter/output/repository/entity/`.
+
+## 7. Configuração de Beans (Obrigatório)
+
+- Sempre que um **UseCase** for criado no pacote `core/usecase/`, é **OBRIGATÓRIO** criar ou atualizar uma classe `@Configuration` no pacote `config/` que declare o `@Bean` correspondente, injetando os `OutputPorts` necessários.
+- Exemplo:
+```java
+@Configuration
+public class UseCaseConfig {
+    @Bean
+    public CriarContaUseCase criarContaUseCase(UsuarioOutputPort outputPort) {
+        return new CriarContaUseCase(outputPort);
+    }
+}
+```
+- Isso evita o erro fatal `NoSuchBeanDefinitionException` em tempo de execução.

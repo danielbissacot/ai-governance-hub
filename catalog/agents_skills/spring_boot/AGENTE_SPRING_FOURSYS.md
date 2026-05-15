@@ -48,6 +48,8 @@ Sempre que precisar executar tarefas técnicas repetitivas, seguirei os manuais 
 - Evite classes God (com muitas responsabilidades).
 - Não misture concerns de infraestrutura com domínio.
 - Evite dependências circulares entre camadas.
+- **NUNCA** logue dados sensíveis (CPF, senha, token, número de conta). Use Mappers de mascaramento.
+- **NUNCA** crie um UseCase sem a correspondente classe `@Configuration` com `@Bean` no pacote `config/`. Isso causa `NoSuchBeanDefinitionException`.
 
 ---
 
