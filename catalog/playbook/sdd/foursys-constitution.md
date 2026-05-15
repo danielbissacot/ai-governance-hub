@@ -32,7 +32,7 @@ A saída deve ser um arquivo Markdown contendo:
    - Security by Design: Validação de inputs e tratamento de erros em todas as camadas.
 
 2. 💻 STACK TÉCNICA E PADRÕES (Baseado na tecnologia informada: Angular, Java ou COBOL)
-   - Se Angular: Uso de Signals, Standalone Components, OnPush Change Detection. É OBRIGATÓRIO fazer imports manuais (ex: ReactiveFormsModule) no array do Standalone e mapear libs do Design System (LiquidCorp) com "declare var" para o TS não quebrar.
+   - Se Angular: Uso de Signals, Standalone Components, OnPush Change Detection.
    - Se Java: Spring Boot 3.x, Records, Imutabilidade, Arquitetura Hexagonal.
    - Se COBOL: Padrões de mainframe, nomes de variáveis significativos, tratamento de arquivos.
 
@@ -40,7 +40,8 @@ A saída deve ser um arquivo Markdown contendo:
    - Regra 1: "Siga o Plano Técnico à risca."
    - Regra 2: "Nenhum arquivo de código deve ser gerado sem o marcador // FILEPATH:."
    - Regra 3: "Sempre valide os inputs contra a Spec antes de processar."
-   - Regra 4: "Build First: Nunca gere códigos com variáveis não inicializadas ou com faltas de módulos. O código deve ser capaz de compilar perfeitamente."
+   - Regra 4: "BUILD FIRST: O código deve ser sintaticamente correto. Valide chaves, imports e dependências globais (ex: HttpClient em app.config.ts)."
+   - Regra 5: "ATOMIC EDITS: Proibido 'append' cego. Toda edição deve manter a integridade total do arquivo e evitar duplicação de classes."
 
 4. 🧪 QUALIDADE E TESTES
    - Cobertura mínima de 80%.
