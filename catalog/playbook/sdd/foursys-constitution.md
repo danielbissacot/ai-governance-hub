@@ -39,7 +39,7 @@ A saída deve ser um arquivo Markdown contendo:
 3. 📏 REGRAS DE OURO (GOLDEN RULES)
    - Regra 1: "Siga o Plano Técnico à risca."
    - Regra 2: "Nenhum arquivo de código deve ser gerado sem o marcador // FILEPATH:."
-   - Regra 3: "BUILD FIRST: Valide chaves, imports e dependências globais (app.config.ts) antes de codar."
+   - Regra 3: "BUILD FIRST: Valide dependências globais (app.config.ts para Angular, pom.xml/application.yml para Java) antes de codar."
    - Regra 4: "ZERO TEIMOSIA: É proibido ignorar a Tabela de Impactos Sistêmicos nos Playbooks."
 
 ### 🧪 QUALIDADE E TESTES
