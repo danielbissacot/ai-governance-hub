@@ -20,7 +20,7 @@ metadata:
 ### 📏 REGRAS DE OURO (GOLDEN RULES)
 - **Regra 1 (Siga o Plano):** Não invente caminhos.
 - **Regra 2 (Filepath):** Todo código deve ter `// FILEPATH:`.
-- **Regra 3 (Build First):** Valide `app.config.ts` e `app.routes.ts` ANTES de gerar qualquer componente. É mandatório usar o padrão Standalone; o uso de AppModule é estritamente proibido para manter a senioridade técnica.
+- **Regra 3 (Build First):** Valide `app.config.ts` e `app.routes.ts` ANTES de gerar qualquer componente.
 - **Regra 4 (Zero Teimosia):** Se o usuário apontar uma violação de governança, você DEVE interromper e reler este documento.
 - **Regra 5 (Atomic Edits):** Toda edição deve manter a integridade total do arquivo. Proibido append cego.
 - **Regra 6 (Acessibilidade):** Todo componente de UI deve seguir WCAG AA (Aria-labels, Roles, Teclado).
