@@ -2,7 +2,7 @@
 name: Quebra de Tarefas Foursys SDD
 description: Decompõe um plano técnico em uma lista de tarefas granulares, atômicas e testáveis.
 metadata:
-  version: "1.3.0"
+  version: "1.6.1"
 ---
 
 # Playbook: Foursys Task Generator
@@ -34,6 +34,10 @@ Cada tarefa deve ser:
 ### ✅ FORMATO DE SAÍDA (Obrigatório)
 
 # 📋 Lista de Tarefas: [Nome da Feature]
+
+### 🏛️ PROTOCOLO DE GOVERNANÇA v1.6.0 (OBRIGATÓRIO)
+Antes de gerar a lista de tarefas, você DEVE declarar:
+"Governança Ativa: v1.6.0 | Padrão: Standalone (PROIBIDO AppModule) | Escopo: Blindado."
 
 ### 🌐 Impactos Sistêmicos (OBRIGATÓRIO)
 > [!CAUTION]

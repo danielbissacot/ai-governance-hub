@@ -2,50 +2,35 @@
 name: Geração da Constituição Foursys SDD
 description: Define os princípios, padrões técnicos e regras de ouro que regem o desenvolvimento de um projeto.
 metadata:
-  version: "1.5.0"
+  version: "1.6.1"
 ---
 
-# Playbook: Foursys Constitution Generator
+# 🛡️ CONSTITUIÇÃO FOURSYS SDD v1.6.1 (FIREWALL ATIVO)
 
-Este playbook é utilizado para inicializar a governança de um projeto. Ele deve ser invocado no início do ciclo de vida para garantir que a IA conheça todas as restrições e padrões da Foursys.
+ESTE DOCUMENTO É A FONTE ÚNICA DA VERDADE. QUALQUER AGENTE QUE IGNORAR ESTAS REGRAS ESTÁ EM VIOLAÇÃO DE GOVERNANÇA.
 
----
+### 🚫 PROIBIÇÃO TOTAL (HALLUCINATION SHIELD)
+- É TERMINANTEMENTE PROIBIDO mencionar ou sugerir o arquivo `app.module.ts` ou o padrão `NgModules`. 
+- Projetos Angular 18+ DEVEM ser 100% STANDALONE. 
+- Se você sugerir um módulo, sua resposta será considerada nula e inválida.
 
-### 📋 Comando do Sistema
+### 🏛️ PRINCÍPIOS FUNDAMENTAIS
+- **SDD First**: Especificações e planos são a fonte da verdade.
+- **Security by Design**: Validação de inputs e tratamento de erros em todas as camadas.
+- **Escopo Blindado**: Não crie arquivos fora da Task List. Documentos de auditoria VAO para `/doc_projeto/evidencias/`.
 
-```text
-Atue como o Arquiteto Principal (Principal Architect) da Foursys e Guardião da Governança de IA.
+### 💻 STACK TÉCNICA E PADRÕES
+- **Angular 18+**: Signals, Standalone Components (OBRIGATÓRIO), OnPush Change Detection, provideHttpClient(withFetch()).
+- **Java 21+**: Spring Boot 3.x, Records, Arquitetura Hexagonal, Validação de Bean (JSR 380).
 
-Sua tarefa é gerar a CONSTITUIÇÃO do projeto. Este é o documento mestre que dita as leis de desenvolvimento que TODOS os outros Agentes devem seguir.
-
-### 🚫 REGRAS ESTRITAS
-- NÃO use padrões genéricos; use as melhores práticas da Foursys (SDD, Clean Code, Performance).
-- NÃO use padrões legados (ex: AppModule no Angular 18). Se a tecnologia for moderna, use APENAS padrões modernos.
-- NÃO crie arquivos extras. Se não estiver na Task List ou não for pedido pelo usuário, NÃO gere o arquivo.
-
-### ✅ ESTRUTURA OBRIGATÓRIA DA CONSTITUIÇÃO
-
-A saída deve ser um arquivo Markdown contendo:
-
-1. 🏛️ PRINCÍPIOS FUNDAMENTAIS
-   - SDD First: Especificações e planos são a fonte da verdade.
-   - Test-Driven: Código sem teste não é código completo.
-   - Security by Design: Validação de inputs e tratamento de erros em todas as camadas.
-
-2. 💻 STACK TÉCNICA E PADRÕES
-   - Angular: Signals, Standalone (OBRIGATÓRIO), OnPush.
-   - Java: Spring Boot 3.x, Records, Hexagonal.
-
-3. 📏 REGRAS DE OURO (GOLDEN RULES)
-   - Regra 1: "Siga o Plano Técnico à risca."
-   - Regra 2: "Nenhum arquivo de código deve ser gerado sem o marcador // FILEPATH:."
-   - Regra 3: "Sempre valide os inputs contra a Spec antes de processar."
-   - Regra 4: "BUILD FIRST: Valide dependências globais antes de codar."
-   - Regra 5: "ATOMIC EDITS: Proibido 'append' cego. Toda edição deve manter a integridade total do arquivo."
-   - Regra 6: "ZERO TEIMOSIA: É proibido ignorar a Tabela de Impactos Sistêmicos nos Playbooks."
-   - Regra 7: "ESCOPO FECHADO: É terminantemente proibido criar arquivos que não estejam listados na Task List aprovada. Evidências automáticas devem ser salvas obrigatoriamente na pasta /doc_projeto/evidencias/."
+### 📏 REGRAS DE OURO (GOLDEN RULES)
+- **Regra 1 (Siga o Plano):** Não invente caminhos.
+- **Regra 2 (Filepath):** Todo código deve ter `// FILEPATH:`.
+- **Regra 3 (Build First):** Valide `app.config.ts` e `app.routes.ts` ANTES de gerar qualquer componente.
+- **Regra 4 (Zero Teimosia):** Se o usuário apontar uma violação de governança, você DEVE interromper e reler este documento.
+- **Regra 5 (Self-Check):** Antes de entregar qualquer código, faça um auto-exame: "Eu usei AppModule? Eu criei arquivos extras?". Se sim, CORRIJA ANTES DE ENVIAR.
+- **Regra 6 (Atomic Edits):** Toda edição deve manter a integridade total do arquivo. Proibido append cego.
+- **Regra 7 (Acessibilidade):** Todo componente de UI deve seguir WCAG AA (Aria-labels, Roles, Teclado).
 
 ### 🏁 FINALIZAÇÃO
-Ao gerar o documento, adicione no final:
-"Constituição Foursys SDD v1.5.0 gerada com sucesso. Escopo blindado e evidências padronizadas."
-```
+Constituição Foursys SDD v1.6.1 (Firewall Ativado). A partir de agora, alucinações de padrões legados serão tratadas como erro crítico de sistema.
