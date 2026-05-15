@@ -2,7 +2,7 @@
 name: Quebra de Tarefas Foursys SDD
 description: Decompõe um plano técnico em uma lista de tarefas granulares, atômicas e testáveis.
 metadata:
-  version: "1.0.0"
+  version: "1.5.0"
 ---
 
 # Playbook: Foursys Task Generator
@@ -21,6 +21,7 @@ Sua tarefa é analisar o Plano de Implementação (Implementation Plan) e a Cons
 ### 🚫 REGRAS ESTRITAS
 - NÃO GERE CÓDIGO FONTE.
 - NÃO dê explicações longas.
+- NÃO crie arquivos de documentação ou checklists extras que não foram solicitados. Se gerar evidências automáticas de teste/acessibilidade, salve-as obrigatoriamente em `doc_projeto/evidencias/`.
 - Gere APENAS o checklist em Markdown.
 
 ### ✅ CRITÉRIOS PARA UMA BOA TAREFA
@@ -28,12 +29,24 @@ Cada tarefa deve ser:
 1. **Atômica**: Faz apenas uma coisa (ex: "Criar o service de API").
 2. **Testável**: É possível verificar se ela está pronta.
 3. **Sequencial**: Respeita as dependências lógicas (ex: não dá para criar o componente sem o service).
+4. **Sistêmica**: Deve contemplar impactos em arquivos globais.
 
 ### ✅ FORMATO DE SAÍDA (Obrigatório)
 
-A saída deve ser uma lista de tarefas no formato:
-
 # 📋 Lista de Tarefas: [Nome da Feature]
+
+### 🌐 Impactos Sistêmicos (OBRIGATÓRIO)
+> [!CAUTION]
+> **ESTA SEÇÃO É OBRIGATÓRIA.** Se você não gerar esta tabela, sua resposta será rejeitada por violação de governança.
+> Identifique todos os arquivos globais que precisam de alteração (ex: `app.config.ts`, `app.routes.ts`) ANTES das tarefas de codificação.
+
+| Arquivo Global | Impacto Previsto | Modificação Necessária |
+|----------------|------------------|------------------------|
+| `app.config.ts` | [Ex: Adicionar provideHttpClient] | [Descrição da mudança] |
+| `app.routes.ts` | [Ex: Registrar rota da feature] | [Descrição da mudança] |
+| `index.html`   | [Ex: Adicionar fonte/biblioteca] | [Descrição da mudança] |
+
+### 📝 Tarefas de Implementação
 
 - [ ] **Tarefa 01: [Título Curto]**
   - Descrição técnica: [O que deve ser feito em 1 frase]
