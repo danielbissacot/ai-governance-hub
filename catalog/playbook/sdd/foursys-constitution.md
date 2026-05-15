@@ -2,7 +2,7 @@
 name: Geração da Constituição Foursys SDD
 description: Define os princípios, padrões técnicos e regras de ouro que regem o desenvolvimento de um projeto.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Playbook: Foursys Constitution Generator
