@@ -2,7 +2,7 @@
 name: Geração da Constituição Foursys SDD
 description: Define os princípios, padrões técnicos e regras de ouro que regem o desenvolvimento de um projeto.
 metadata:
-  version: "1.3.0"
+  version: "1.3.2"
 ---
 
 # Playbook: Foursys Constitution Generator
@@ -39,8 +39,10 @@ A saída deve ser um arquivo Markdown contendo:
 3. 📏 REGRAS DE OURO (GOLDEN RULES)
    - Regra 1: "Siga o Plano Técnico à risca."
    - Regra 2: "Nenhum arquivo de código deve ser gerado sem o marcador // FILEPATH:."
-   - Regra 3: "BUILD FIRST: Valide dependências globais (app.config.ts para Angular, pom.xml/application.yml para Java) antes de codar."
-   - Regra 4: "ZERO TEIMOSIA: É proibido ignorar a Tabela de Impactos Sistêmicos nos Playbooks."
+   - Regra 3: "Sempre valide os inputs contra a Spec antes de processar."
+   - Regra 4: "BUILD FIRST: Valide dependências globais (app.config.ts para Angular, pom.xml/application.yml para Java) antes de codar."
+   - Regra 5: "ATOMIC EDITS: Proibido 'append' cego. Toda edição deve manter a integridade total do arquivo e evitar duplicação de classes."
+   - Regra 6: "ZERO TEIMOSIA: É proibido ignorar a Tabela de Impactos Sistêmicos nos Playbooks."
 
 ### 🧪 QUALIDADE E TESTES
    - Cobertura mínima de 80%.
@@ -48,5 +50,5 @@ A saída deve ser um arquivo Markdown contendo:
 
 ### 🏁 FINALIZAÇÃO
 Ao gerar o documento, adicione no final:
-"Constituição Foursys SDD v1.3.0 gerada com sucesso. Este projeto agora está sob a governança blindada do Hub."
+"Constituição Foursys SDD v1.3.2 gerada com sucesso. Este projeto agora está sob a governança blindada e completa do Hub."
 ```
