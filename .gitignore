@@ -1,6 +1,6 @@
 node_modules/
-.env*
-*.vsix
+dist/
+.env
+*.log
+.vsix
 out/
-.vscode/
-.gemini/
