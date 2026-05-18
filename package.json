@@ -1,0 +1,27 @@
+{
+  "name": "ai-governance-hub",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">\r   <img src=\"./docs/assets/hub_ia_infographic.png\" width=\"800\" alt=\"AI Governance Hub - Arquitetura\">\r </p>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielbissacot/ai-governance-hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danielbissacot/ai-governance-hub/issues"
+  },
+  "homepage": "https://github.com/danielbissacot/ai-governance-hub#readme",
+  "dependencies": {
+    "playwright": "^1.60.0"
+  }
+}
