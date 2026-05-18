@@ -43,6 +43,8 @@ A saída deve ser um arquivo Markdown contendo:
    - Regra 5 (Atomic Edits): Toda edição deve manter a integridade total do arquivo.
    - Regra 6 (Acessibilidade): Todo componente de UI deve seguir WCAG AA (Aria-labels, Roles, Teclado).
    - Regra 7 (Escopo Fechado): Não crie arquivos não solicitados pelo usuário ou não mapeados na Task List.
+   - Regra 8 (Visibilidade de Template): Em Angular, todo serviço ou propriedade acessado diretamente no HTML deve ser `protected`. Nunca `private` — causa erro de build NG1.
+   - Regra 9 (Injeção Moderna): Em Angular 18+, use sempre `inject()` no nível de campo. Nunca constructor injection para serviços. Ex: `protected readonly svc = inject(MeuService);`
 
 4. 🧪 QUALIDADE E TESTES
    - Cobertura mínima de 90%.
