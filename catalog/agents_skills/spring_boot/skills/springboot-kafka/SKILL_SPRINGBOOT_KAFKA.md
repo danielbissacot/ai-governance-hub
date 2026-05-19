@@ -21,7 +21,7 @@ Use este skill quando:
 
 ## Pré-Requisitos
 
-- **JDK 17** ou superior
+- **JDK 21** (obrigatório, alinhado com AGENTE_SPRING_FOURSYS)
 - **Maven**
 - **Spring Boot 3.x.x**
 
@@ -71,11 +71,72 @@ spring:
           config: 'org.apache.kafka.common.security.plain.PlainLoginModule required username="${MY_KAFKA_USERNAME}" password="${MY_KAFKA_PASSWORD}";'
 ```
 
+## Regras Obrigatórias de Configuração
+
+### Producer — Configuração mínima obrigatória
+
+Adicione no `application.yml`:
+
+```yaml
+spring:
+  kafka:
+    producer:
+      acks: all                          # Garante durabilidade — nunca use acks: 0 ou acks: 1 em produção
+      retries: 3
+      properties:
+        enable.idempotence: true         # Evita duplicatas em retry
+        max.in.flight.requests.per.connection: 1
+```
+
+### Consumer — Configuração mínima obrigatória
+
+```yaml
+spring:
+  kafka:
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP_ID}   # Sempre via variável de ambiente — nunca hardcoded
+      auto-offset-reset: earliest
+      enable-auto-commit: false              # Commit manual obrigatório — evita perda de mensagens
+```
+
+### Retry e Dead-Letter Topic (DLT) — Obrigatório em consumers de negócio
+
+Use `@RetryableTopic` para configurar retry com backoff e DLT automático:
+
+```java
+@RetryableTopic(
+    attempts = "3",
+    backoff = @Backoff(delay = 1000, multiplier = 2.0),
+    dltTopicSuffix = ".DLT"   // Tópico DLT recebe sufixo .DLT obrigatoriamente
+)
+@KafkaListener(topics = "${kafka.topic.nome}")
+public void consumir(MinhaEvent evento) {
+    // lógica de negócio
+}
+```
+
+**Regras DLT:**
+- O sufixo do tópico DLT deve ser sempre `.DLT` (ex: `pedidos.criados.DLT`)
+- O consumer **não deve fazer `ack` manual** em caso de exceção de negócio — deixe o retry tratar
+- Exceções de infraestrutura (timeout, conexão) devem ser lançadas para acionar retry
+- Exceções de negócio irrecuperáveis devem ser capturadas e o evento enviado ao DLT manualmente
+
 ## Problemas Conhecidos
 
 ### Erro: SslAuthenticationException / SSLHandshakeException
 **Causa**: Certificado root do Kafka não está no truststore.
-**Solução**: Importe o certificado **ISRG Root X1** no seu keystore conforme guia de segurança.
+**Solução**: Importe o certificado **ISRG Root X1** com o comando abaixo:
+
+```bash
+keytool -importcert \
+  -alias isrg-root-x1 \
+  -file isrg-root-x1.pem \
+  -keystore $JAVA_HOME/lib/security/cacerts \
+  -storepass changeit \
+  -noprompt
+```
+
+Obtenha o arquivo `isrg-root-x1.pem` em: https://letsencrypt.org/certs/isrgrootx1.pem
 
 ## Referências Completas
 

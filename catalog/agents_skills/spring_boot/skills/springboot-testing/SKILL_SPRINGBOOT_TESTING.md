@@ -27,15 +27,15 @@ Orientação para criar testes unitários significativos e focados em comportame
 
 ### Cobertura vs Qualidade
 
-Atingir ≥95% de cobertura é necessário, mas não suficiente. Cada teste deve:
+Atingir **≥95% de cobertura** é necessário, mas não suficiente. Cada teste deve:
 
-1. Validar regras de negócio reais  
-2. Cobrir cenários de sucesso e falha  
-3. Testar casos extremos relevantes  
-4. Ter nomes descritivos em estilo BDD  
-5. Ser independente e determinístico  
-6. Falhar pelos motivos corretos  
-7. Servir como documentação viva  
+1. Validar regras de negócio reais
+2. Cobrir cenários de sucesso e falha
+3. Testar casos extremos relevantes
+4. Ter nomes descritivos em estilo BDD: `should[Comportamento][QuandoCondicao]()`
+5. Ser independente e determinístico (sem estado compartilhado entre testes)
+6. Não quebrar ao refatorar implementação interna quando o comportamento observável permanece igual
+7. Ter nome de método que descreva o comportamento esperado sem precisar ler o corpo do teste
 
 ## Testando por Camada
 
@@ -43,17 +43,32 @@ Atingir ≥95% de cobertura é necessário, mas não suficiente. Cada teste deve
 
 Teste invariantes, regras de validação e comportamento do domínio.
 
+**Regras obrigatórias:**
+- O teste de Domain **não deve importar nenhuma classe de infraestrutura** (Spring, JPA, Feign, etc.)
+- Valide que invariantes lançam exceção específica (não `RuntimeException` genérico) quando violados
+- Use apenas `new` para construir objetos de domínio — sem mocks de entidades de domínio
+
 **Para exemplos completos e padrões**, veja [references/DOMAIN_TESTING.md](REFERENCES/DOMAIN_TESTING.MD)
 
 ### UseCases
 
 Teste orquestração da lógica de negócio, tratamento de erros e colaboração com ports.
 
+**Regras obrigatórias:**
+- Todos os ports (OutputPort, repositórios) devem ser mockados com `@Mock` / `Mockito.mock()`
+- Valide tanto o caminho de sucesso quanto todos os caminhos de exceção mapeados no UseCase
+- Nunca use `@SpringBootTest` em testes de UseCase — são testes unitários puros
+
 **Para padrões abrangentes de testes de UseCase**, veja [references/USECASE_TESTING.md](REFERENCES/USECASE_TESTING.MD)
 
 ### Adapters
 
 Teste mapeamento de DTO, validações e interação com infraestrutura.
+
+**Regras obrigatórias:**
+- Valide que o mapper converte corretamente todos os campos (sem campos ignorados silenciosamente)
+- Para adapters de entrada (Controllers): use `@WebMvcTest` isolado, sem subir contexto completo
+- Para adapters de saída (repositórios, clients): use mocks ou test doubles, nunca banco real em teste unitário
 
 ## Validação de Qualidade de Testes
 

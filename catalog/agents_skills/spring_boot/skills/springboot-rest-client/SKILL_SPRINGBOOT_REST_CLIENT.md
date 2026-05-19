@@ -298,7 +298,12 @@ public class UsuarioApiClient {
             .uri("/api/v1/usuarios/{cpf}", cpf)
             .retrieve()
             .onStatus(HttpStatusCode::is4xxClientError, (request, response) -> {
-                throw new RuntimeException("Usuário não encontrado: " + cpf);
+                // REGRA: use exceção de domínio — nunca RuntimeException genérico
+                throw new UsuarioNaoEncontradoException(cpf);
+            })
+            .onStatus(HttpStatusCode::is5xxServerError, (request, response) -> {
+                // REGRA: 5xx sempre tratado explicitamente com exceção de indisponibilidade
+                throw new ServicoExternoIndisponivelException("usuario-api");
             })
             .body(UsuarioApiResponse.class);
     }
@@ -311,7 +316,26 @@ public class UsuarioApiClient {
 2. **✅ Configure pool de conexões**: Use Apache HttpClient 5.
 3. **✅ Encapsule em clients**: Crie classes client dedicadas em `adapter/output/client`.
 4. **✅ Use DTOs específicos**: Não use entidades de domínio para comunicação HTTP.
-5. **✅ Configure resiliência**: Use Resilience4j para retry e circuit breaker.
+5. **✅ Configure resiliência com Resilience4j**: Use os thresholds mínimos abaixo como baseline — nunca suba para produção sem circuit breaker configurado:
+
+```yaml
+resilience4j:
+  circuitbreaker:
+    instances:
+      usuario-api:
+        slidingWindowSize: 10           # mínimo obrigatório
+        failureRateThreshold: 50        # abre o circuito com 50% de falhas
+        waitDurationInOpenState: 10s    # tempo mínimo em estado aberto
+        minimumNumberOfCalls: 5
+  retry:
+    instances:
+      usuario-api:
+        maxAttempts: 3
+        waitDuration: 500ms
+```
+
+6. **✅ Trate 4xx e 5xx explicitamente**: Use `onStatus()` para ambos os grupos — veja exemplo no Passo 4.
+7. **✅ Use exceções de domínio**: Nunca use `RuntimeException` genérico nos handlers de status.
 
 ## Referências
 

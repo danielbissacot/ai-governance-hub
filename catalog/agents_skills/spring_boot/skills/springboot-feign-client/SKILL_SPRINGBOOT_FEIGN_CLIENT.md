@@ -154,6 +154,9 @@ public class FeignClientConfig {
         return new Retryer.Default(500, 2000, 3);
     }
 }
+
+// REGRA: O Bean feignRetryer() acima é o retry padrão para todos os ambientes.
+// NÃO referencie classes CustomRetryer externas sem fornecer a implementação completa nesta skill.
 ```
 
 **Propriedades no application.yml:**
@@ -219,7 +222,6 @@ feign:
         connectTimeout: 3000
         readTimeout: 15000
         loggerLevel: none
-        retryer: com.empresa.config.CustomRetryer
   httpclient:
     enabled: true
     max-connections: 500
@@ -228,6 +230,31 @@ feign:
   circuitbreaker:
     enabled: true
 ```
+
+## Regra: Mapper ACL com MapStruct (obrigatório)
+
+O mapper que traduz entre DTOs da API externa e objetos de domínio **deve sempre usar MapStruct**. Conversões manuais são proibidas.
+
+```java
+package com.empresa.projeto.adapter.output.client.mapper;
+
+import com.empresa.projeto.core.domain.model.Usuario;
+import com.empresa.projeto.adapter.output.client.dto.response.UsuarioApiResponse;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+@Mapper(componentModel = "spring")
+public interface UsuarioApiMapper {
+
+    @Mapping(source = "nomeCompleto", target = "nome")
+    Usuario toDomain(UsuarioApiResponse response);
+}
+```
+
+**Regras do Mapper:**
+- Sempre use `@Mapper(componentModel = "spring")` para injeção via Spring
+- Campos com nomes diferentes entre API e domínio devem ter `@Mapping` explícito
+- Nunca passe objetos de domínio diretamente para o FeignClient — sempre mapeie primeiro
 
 ## Passo 2: Criar DTOs da API Externa
 
@@ -352,15 +379,15 @@ public class UsuarioApiFallback implements UsuarioApiFeignClient {
     @Override
     public UsuarioApiResponse buscarPorCpf(String cpf) {
         log.warn("Fallback acionado para buscarPorCpf: {}", cpf);
-        // Retorna null ou resposta default
-        return null;
+        // REGRA: Fallback NUNCA retorna null. Lance exceção de domínio ou retorne Optional.empty().
+        throw new ServicoExternoIndisponivelException("usuario-api", "buscarPorCpf");
     }
     
     @Override
     public UsuarioApiResponse criar(CriarUsuarioRequest request) {
         log.warn("Fallback acionado para criar usuário: {}", request.getCpf());
-        // Pode lançar exceção ou retornar resposta indicando falha
-        throw new RuntimeException("API de usuários indisponível");
+        // REGRA: Fallback NUNCA retorna null. Lance exceção de domínio com contexto.
+        throw new ServicoExternoIndisponivelException("usuario-api", "criar");
     }
 }
 ```
@@ -396,23 +423,28 @@ feign:
 
 ## Tratamento de Erros
 
-### Exceções comuns do Feign:
+**REGRA**: Toda `FeignException` deve ser capturada e relançada como exceção de domínio. Nunca retorne `null` nem engula a exceção silenciosamente.
+
+### Exceções comuns do Feign — ação obrigatória por status:
 
 ```java
 try {
     // chamada Feign
-} catch (FeignException.BadRequest e) {
-    // 400 - Requisição inválida
-} catch (FeignException.Unauthorized e) {
-    // 401 - Não autorizado
-} catch (FeignException.Forbidden e) {
-    // 403 - Proibido
 } catch (FeignException.NotFound e) {
-    // 404 - Não encontrado
+    // 404 - Recurso não encontrado: lance exceção de domínio específica
+    throw new UsuarioNaoEncontradoException(cpf, e);
+} catch (FeignException.BadRequest e) {
+    // 400 - Dado inválido enviado: lance exceção de validação de domínio
+    throw new RequisicaoInvalidaException("usuario-api", e.getMessage(), e);
+} catch (FeignException.Unauthorized | FeignException.Forbidden e) {
+    // 401/403 - Problema de autenticação/autorização: lance exceção de segurança
+    throw new AcessoNegadoException("usuario-api", e);
 } catch (FeignException.InternalServerError e) {
-    // 500 - Erro no servidor
+    // 500 - Falha no servidor externo: lance exceção de indisponibilidade
+    throw new ServicoExternoIndisponivelException("usuario-api", e);
 } catch (FeignException e) {
-    // Outros erros HTTP
+    // Outros erros HTTP inesperados: sempre relance com contexto
+    throw new ServicoExternoIndisponivelException("usuario-api", e);
 }
 ```
 

@@ -87,11 +87,11 @@ public interface AccountRepository extends MongoRepository<AccountDocument, Stri
 
 ### MongoTemplate (Para casos complexos)
 
-⚠️ **Use MongoTemplate apenas quando:**
-- Agregações complexas
+⚠️ **Use MongoTemplate apenas quando o `MongoRepository` não suportar nativamente a operação:**
+- Agregações com mais de um estágio de pipeline (`$group`, `$lookup`, `$facet`)
 - Operações bulk customizadas
-- Queries dinâmicas construídas em runtime
-- Operações que o Repository não suporta
+- Queries dinâmicas construídas em runtime (critérios variáveis)
+- Operações que o Repository não suporta mesmo com `@Query`
 
 ```java
 @Component
@@ -176,7 +176,7 @@ public class TransferUseCase {
 **⚠️ Importante:**
 - Transações requerem replica set ou sharded cluster
 - Transações têm impacto em performance
-- Use apenas quando necessário (consistência crítica)
+- Use transações apenas quando **duas ou mais coleções precisam ser modificadas atomicamente na mesma operação de negócio**. Se apenas uma coleção é modificada, não use transação.
 
 **📖 Consulte**: [references/MONGODB_TRANSACTIONS.md](references/MONGODB_TRANSACTIONS.md) para detalhes e boas práticas
 
@@ -196,10 +196,10 @@ Page<AccountDocument> page = accountRepository.findByStatus("ACTIVE", pageable);
 
 ### Paginação Eficiente (Cursor-based)
 
-⚠️ **Evite offset em grandes datasets:**
+⚠️ **Evite paginação por offset quando a coleção tiver mais de 10.000 documentos:**
 ```java
-// ❌ Ineficiente para páginas altas
-PageRequest.of(1000, 20); // Skip de 20.000 documentos!
+// ❌ Ineficiente para coleções grandes — skip de 20.000 documentos!
+PageRequest.of(1000, 20);
 ```
 
 ✅ **Use cursor-based pagination:**
@@ -216,9 +216,9 @@ List<AccountDocument> findByStatusAfterCursor(
 
 ## Indexação - Boas Práticas
 
-⚠️ **SEMPRE crie índices para campos consultados frequentemente!**
+⚠️ **Crie índice para todo campo usado em cláusula de filtro (`Criteria.where()` ou `@Query`). Sem exceções por frequência.**
 
-**Quando criar uma query, sempre analiser se índice é necessário e avisar o usuário:**
+**Quando criar uma query, sempre verificar se índice é necessário e avisar o usuário:**
 
 ```java
 // ✅ Exemplo: Query com índice necessário
